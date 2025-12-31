@@ -486,12 +486,8 @@ class MainActivity : ComponentActivity() {
                         navBackStackEntry?.destination?.route?.startsWith("search/") == true
                     }
 
-                    val shouldShowNavigationBar = remember(navBackStackEntry) {
-                        val currentRoute = navBackStackEntry?.destination?.route
-                        currentRoute == null ||
-                                navigationItems.fastAny { it.route == currentRoute } ||
-                                currentRoute.startsWith("search/")
-                    }
+                    // Show navigation bar on all screens - it will hide when player is expanded
+                    val shouldShowNavigationBar = true
 
                     val isLandscape = remember(configuration.screenWidthDp, configuration.screenHeightDp) {
                         configuration.screenWidthDp > configuration.screenHeightDp
