@@ -693,8 +693,8 @@ class MainActivity : ComponentActivity() {
                     var showAccountDialog by remember { mutableStateOf(false) }
 
                     val baseBg = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
-                    val insetBg = if (playerBottomSheetState.progress > 0f) Color.Transparent else baseBg
-
+                    // val insetBg = if (playerBottomSheetState.progress > 0f) Color.Transparent else baseBg
+                    
                     CompositionLocalProvider(
                         LocalDatabase provides database,
                         LocalContentColor provides if (pureBlack) Color.White else contentColorFor(MaterialTheme.colorScheme.surface),
@@ -845,7 +845,10 @@ class MainActivity : ComponentActivity() {
 
                                         Box(
                                             modifier = Modifier
-                                                .background(insetBg)
+                                                .drawBehind {
+                                                    val currentInsetBg = if (playerBottomSheetState.progress > 0f) Color.Transparent else baseBg
+                                                    drawRect(currentInsetBg)
+                                                }
                                                 .fillMaxWidth()
                                                 .align(Alignment.BottomCenter)
                                                 .height(bottomInsetDp)
@@ -862,7 +865,10 @@ class MainActivity : ComponentActivity() {
 
                                     Box(
                                         modifier = Modifier
-                                            .background(insetBg)
+                                            .drawBehind {
+                                                val currentInsetBg = if (playerBottomSheetState.progress > 0f) Color.Transparent else baseBg
+                                                drawRect(currentInsetBg)
+                                            }
                                             .fillMaxWidth()
                                             .align(Alignment.BottomCenter)
                                             .height(bottomInsetDp)
